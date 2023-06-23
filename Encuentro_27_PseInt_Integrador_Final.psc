@@ -1,0 +1,320 @@
+Algoritmo sin_titulo
+	
+	//	EJERCICIO INTEGRADOR
+	
+	//	El apocalipsis Zombie se ha desatado, pero aún hay esperanza. El Dr. Galard ha conseguido aislar el gen Z
+	//	analizando muestras genéticas codificadas. Una muestra se corresponde con una secuencia de caracteres
+	//  compuesta de cuatro posibles bases (A,B,C,D), por ejemplo: "ACDDCADBCDABDBBA". Para poder detectar el gen
+	//	Z, se representa la muestra como una matriz cuadrada (MxM) y se busca en las dos diagonales principales que
+	//	todas las bases sean iguales. Siguiendo el ejemplo de la muestra anterior la matriz resultante es
+	
+	//			A	C	D	D
+	//			C	A	D	B
+	//			C	D	A	B
+	//			D	B	B	A
+	
+	//	Galard aclara que para que la muestra sea válida el orden de la matriz (el valor de M) debe ser 3x3, 4x4 o 37x37
+	//	(según la muestra). Por desgracia, de antemano no es posible saber el orden de la matriz y el mismo debe ser
+	//	inferido de la muestra ingresada.
+	
+	//	Tu misión: hacer un programa que permita ingresar una muestra completa, detectar si es válida, y de ser así, que
+	//	imprima la matriz y muestre un mensaje que indique si se ha detectado o no el gen Z.
+	
+	//	Hoy la humanidad depende de ti.
+	
+	//	Reglas de Resolución:
+	
+	//		a) Es obligatorio el uso de al menos una variable N-dimensional.
+	//		b) La muestra la guardamos en una variable en el código, no por consola. Es decir:
+	//	       NO hay que usar Leer muestra sino asignarle un valor muestra = "ACDDCADBCDABDBBA" en el código
+	//		c) Subdivida el problema de tal forma de utilizar al menos dos subprogramas
+	
+	Definir opc Como Caracter
+	Definir muestra como Cadena
+	Definir esGenZ Como Logico
+	Definir matriz3, matriz4, matriz37 Como Caracter
+	Definir tamano3,tamano4, tamano37 Como Entero
+	
+	tamano3 = 3
+	tamano4 = 4
+	tamano37 = 37
+	
+	Dimension matriz3(tamano3, tamano3), matriz4(tamano4, tamano4), matriz37(tamano37, tamano37)
+	
+	Limpiar Pantalla
+	
+	Mostrar "BIENVENIDO AL EJERCICIO INTEGRADOR."
+	Mostrar ""
+	Mostrar "AISLAR EL GEN Z"
+	Mostrar ""
+	
+	Hacer
+		
+		esGenZ = Verdadero
+		
+		Escribir "Muestras a Analizar."
+		Escribir ""
+		Escribir "A - BCBBABBACBBBBCBB."
+		Escribir ""
+		Escribir "B - ABAABBCBD."
+		Escribir ""
+		Escribir "C - ACCDBBADDDCCBACABDCBDCBADBDACBBBBDAABBCCBAACCABDBDCDDABDBDADAAACBBBBCDDDCBBBDDCDABBDDABDBDBBACADCDAAADACDDDACCDCACDDABACDCCCAABDDCCACDADDB"
+		Escribir "    CBAACCDBCBCDDDCAACCBAADCBBBCDCBBACBDCCDDADBABCAABBACABDCAACCBDADDCAAACCDBDBBCDDDDDACBCDDADDDDCBADADBDCADDABBCDAACBCCDDDADDADADAACCACDCDDAB"
+		Escribir "    CCCADABBACDACCAADDBCBCCDADBCCADAAABDDDAABBABCADDCCAADDCDDCDCACBADADACADDAADCBDBCDBDDACDCBCDCCABBDCBACDDACCCDADBCADCACAAABBBCADDDDBCBACDBDA"
+		Escribir "    AADDDACCDACBBBADACCCDCACCBACDADBCBBDADACABAACBCCADDCCCCACCCCADBCCDAADCAABBABAADDBDADDABABCCABBCDDACCADAAADBBCCDBADCADCBBDADACCDDBCAAABBBDC"
+		Escribir "    AAAACBAADBABBABACDDBBCBDCDCADABABBDADCBADAACDBCBDABADBCBADCACADAABCDDCABACDDBDCBCBDCAAACBDABBCACBACCCBACACDCADBDCDCDDCAACDBDCBACDBBDAABDBB"
+		Escribir "    CBAAADBABDBAACAAACDCDAAABABDDDBCACADCBBAADCCDABCCCBBCACCBAABDAADDDCDACDDDBCDCCBABDABACCDCDCDABAABCABBADADCBDDACDDCDDCDACDADADCACBCDABABDDC"
+		Escribir "    CDBCCDABACDBDAABDBDDDBADDBACABDCDDBACDDBBDDBBACBCCAACABBDADDBCAACCBCCDADDBCAADDADCCCBAAABABBBBBCABAACADBCBBABACCABCDAABADCCCCDCCADDDCCABBD"
+		Escribir "    DDAAADDADACBBBCBDAADACABABBAACCCADADDABDBCADDDCCDBBCCBCDCDBDDDDCACDACDBBBDDBADDACADDADDABCACDCBBADDABBBDCBBDCDAABADDDDDBCACCCCAAACBCBCDBAC"
+		Escribir "    CCDACCCDBCBDCBADBCDDACCDBDBDBCAAACDDCBAABDBCAADCADDBABABDCBCBCBBBCACBCADDCAAAAAACBBACBBCCACBDCDDDDADCAAACBABDDBDADBAADCBABDDBCDBABDBAADDDB"
+		Escribir "    ACBBBCCCDBDDBDDAADBBADADDDCBCACBABCDBBABAADABCABCDBACBBBCDBADADDBDCBDABBDDDCDDCCACDCBDCADABAABCDCAACCDDBADBDBCDACAAACBCADCCCBAC."
+		Escribir ""
+		Escribir "D - CDDACCACCACAAABC."
+		Escribir ""
+		Escribir "E - ADDDABBDD."
+		Escribir ""
+		Escribir "F - BCAADCCBABCCBABB."
+		Escribir ""
+		Escribir "G - CCADDBACCDDDDBDBCCABBAABDBCDCADDABABCDCDDABBBCABBABBDCADCCDABDDACDBBDBDCCDDCABCAAAACDCDCCACDCDDADAADDACBDBCCDDBCBCBBAAADDAADCAABBBCBCCBCBD"
+		Escribir "    BCCBBCBABADAACDBDBADCBBACDADAADABBDBDBDBDCCDDCABCCCCCADBBBBCCDACCBBBDBDAADDBCCBCCBCBDDDDCCBAAACDDBBCAABAADABBBCCCCDCCBBDCDABCDACBCBACDBCCD"
+		Escribir "    ABDBDCDCADCCBBADDBDCCADCCDCCACCDCDBCDBBADBAADBBCAADDABCAADADAABAACCBABDADADADDBCABDCCBBAADDDCDDCBADBCACCAAADCCDDABDBACBCAAADDBADBDACDDBDCB"
+		Escribir "	    DCCCDDCACBCCCACCCCBACBAAAAACBCBCDAADCAACBCABDDABCBCBACCADABBBABBBBBAAADDDDBABACADAAABDDDCCDCACAACACADADBABACBABDBBADCDBBDACDCAABCADDBDBDCA"
+		Escribir "	    ABDCDABDDADDCDDBCBCDADCDBBDACABCDAABBCBADDDBCBADCABACDCABBCBCBCBCADBABBDBCCCADCADDCBABBDDDBBCBCDABACDDDABCCDBACCBDBADADDDAAACBDCDCCAACBDDC"
+		Escribir "	    DCBADACDDDDBDCBAACDADBBDBDBCCACADBAABBAADAADDDACDDCDBDDBBDAADDAACCCACDBBBBBDCDCDDDABBCBAAADACADDCDCDCBCDCACAAABCADBDBBDDACCBBDABDDBCADCCCA"
+		Escribir "	    DDCDBACBBBDAADDCDAAADBBCDADBDBCBDDCAABCCDCCDCABCAACADADAACADDBBDABAABACDACDCDBBDDCCBCBCAAACBDBDBBBDBDBBCADCBACDCCBDACBBACBCADCDBACCADCDBDC"
+		Escribir "	    DBBACBBCDCAAAAABCCDDCDDBBCBABCBCAABDBCCACBABDCABAACBDBDBCCCCADBBCDCCCAABADBACDDBADCDCAADDDCBDDBDCDCCCCCCCDBCDDBACBBCDACDADCACBDBBCCCDCCBCB"
+		Escribir "	    CDACBDDDACCCAADBDBBDADDCCDDDBCDABCCBACCCCCBAACCBCABAAABBCABBCACCCABCDACBCDBDACACDDCACBCBBCCADABCBBDDABADDAAABACCBDCDABCBBBBACCDABAACDCACCC"
+		Escribir "	    BBCDDACCDBCBCBAACBBBBADBCBCDABAAAABADAAAACDACADACDBBCCABADDDCACDCAACCDABBDBDAABADDBDCCCACDADBDDDCBBCBDCADCBCDAABDDDDBBBBCDDCC."
+		Escribir ""
+		Escribir "H - CACBCACAC."
+		Escribir ""
+		Escribir "I - ACDDCADBCDABDBBA (Prueba Gen Z)."
+		Escribir ""
+		Escribir "S - Salir."
+		Escribir ""
+		Escribir Sin Saltar "Ingrese opcion "
+		Leer opc
+		opc = Mayusculas(opc)
+		
+		Limpiar Pantalla
+		
+		Segun opc Hacer
+			
+			Caso "A":
+				
+				muestra = "BCBBABBACBBBBCBB"
+				ingresarMuestra(matriz4, muestra, tamano4)
+				Mostrar "MATRIZ 4 X 4"
+				Mostrar ""
+				mostrarMatriz(matriz4, tamano4)
+				genZ(matriz4, tamano4, esGenZ)
+				limpiarMonitor()
+				
+			Caso "B":
+				
+				muestra = "ABAABBCBD"
+				ingresarMuestra(matriz3, muestra, tamano3)
+				Mostrar "MATRIZ 3 X 3"
+				Mostrar ""
+				mostrarMatriz(matriz3, tamano3)
+				genZ(matriz3, tamano3, esGenZ)
+				limpiarMonitor()
+				
+			Caso "C":
+				
+				muestra = "ACCDBBADDDCCBACABDCBDCBADBDACBBBBDAABBCCBAACCABDBDCDDABDBDADAAACBBBBCDDDCBBBDDCDABBDDABDBDBBACADCDAAADACDDDACCDCACDDABACDCCCAABDDCCACDADDBCBAACCDBCBCDDDCAACCBAADCBBBCDCBBACBDCCDDADBABCAABBACABDCAACCBDADDCAAACCDBDBBCDDDDDACBCDDADDDDCBADADBDCADDABBCDAACBCCDDDADDADADAACCACDCDDABCCCADABBACDACCAADDBCBCCDADBCCADAAABDDDAABBABCADDCCAADDCDDCDCACBADADACADDAADCBDBCDBDDACDCBCDCCABBDCBACDDACCCDADBCADCACAAABBBCADDDDBCBACDBDAAADDDACCDACBBBADACCCDCACCBACDADBCBBDADACABAACBCCADDCCCCACCCCADBCCDAADCAABBABAADDBDADDABABCCABBCDDACCADAAADBBCCDBADCADCBBDADACCDDBCAAABBBDCAAAACBAADBABBABACDDBBCBDCDCADABABBDADCBADAACDBCBDABADBCBADCACADAABCDDCABACDDBDCBCBDCAAACBDABBCACBACCCBACACDCADBDCDCDDCAACDBDCBACDBBDAABDBBCBAAADBABDBAACAAACDCDAAABABDDDBCACADCBBAADCCDABCCCBBCACCBAABDAADDDCDACDDDBCDCCBABDABACCDCDCDABAABCABBADADCBDDACDDCDDCDACDADADCACBCDABABDDCCDBCCDABACDBDAABDBDDDBADDBACABDCDDBACDDBBDDBBACBCCAACABBDADDBCAACCBCCDADDBCAADDADCCCBAAABABBBBBCABAACADBCBBABACCABCDAABADCCCCDCCADDDCCABBDDDAAADDADACBBBCBDAADACABABBAACCCADADDABDBCADDDCCDBBCCBCDCDBDDDDCACDACDBBBDDBADDACADDADDABCACDCBBADDABBBDCBBDCDAABADDDDDBCACCCCAAACBCBCDBACCCDACCCDBCBDCBADBCDDACCDBDBDBCAAACDDCBAABDBCAADCADDBABABDCBCBCBBBCACBCADDCAAAAAACBBACBBCCACBDCDDDDADCAAACBABDDBDADBAADCBABDDBCDBABDBAADDDBACBBBCCCDBDDBDDAADBBADADDDCBCACBABCDBBABAADABCABCDBACBBBCDBADADDBDCBDABBDDDCDDCCACDCBDCADABAABCDCAACCDDBADBDBCDACAAACBCADCCCBAC"
+				ingresarMuestra(matriz37, muestra, tamano37)
+				Mostrar "MATRIZ 37 X 37"
+				Mostrar ""
+				mostrarMatriz(matriz37, tamano37)
+				genZ(matriz37, tamano37, esGenZ)
+				limpiarMonitor()
+				
+			Caso "D":
+				
+				muestra = "CDDACCACCACAAABC"
+				ingresarMuestra(matriz4, muestra, tamano4)
+				Mostrar "MATRIZ 4 X 4"
+				Mostrar ""
+				mostrarMatriz(matriz4, tamano4)
+				genZ(matriz4, tamano4, esGenZ)
+				limpiarMonitor()
+				
+			Caso "E":
+				
+				muestra = "ADDDABBDD"
+				ingresarMuestra(matriz3, muestra, tamano3)
+				Mostrar "MATRIZ 3 X 3"
+				Mostrar ""
+				mostrarMatriz(matriz3, tamano3)
+				genZ(matriz3, tamano3,esGenZ)
+				limpiarMonitor()
+				
+			Caso "F":
+				
+				muestra = "BCAADCCBABCCBABB"
+				ingresarMuestra(matriz4, muestra, tamano4)
+				Mostrar "MATRIZ 4 X 4"
+				Mostrar ""
+				mostrarMatriz(matriz4, tamano4)
+				genZ(matriz4, tamano4,esGenZ)
+				limpiarMonitor()
+				
+			Caso "G":
+				
+				muestra = "CCADDBACCDDDDBDBCCABBAABDBCDCADDABABCDCDDABBBCABBABBDCADCCDABDDACDBBDBDCCDDCABCAAAACDCDCCACDCDDADAADDACBDBCCDDBCBCBBAAADDAADCAABBBCBCCBCBDBCCBBCBABADAACDBDBADCBBACDADAADABBDBDBDBDCCDDCABCCCCCADBBBBCCDACCBBBDBDAADDBCCBCCBCBDDDDCCBAAACDDBBCAABAADABBBCCCCDCCBBDCDABCDACBCBACDBCCDABDBDCDCADCCBBADDBDCCADCCDCCACCDCDBCDBBADBAADBBCAADDABCAADADAABAACCBABDADADADDBCABDCCBBAADDDCDDCBADBCACCAAADCCDDABDBACBCAAADDBADBDACDDBDCBDCCCDDCACBCCCACCCCBACBAAAAACBCBCDAADCAACBCABDDABCBCBACCADABBBABBBBBAAADDDDBABACADAAABDDDCCDCACAACACADADBABACBABDBBADCDBBDACDCAABCADDBDBDCAABDCDABDDADDCDDBCBCDADCDBBDACABCDAABBCBADDDBCBADCABACDCABBCBCBCBCADBABBDBCCCADCADDCBABBDDDBBCBCDABACDDDABCCDBACCBDBADADDDAAACBDCDCCAACBDDCDCBADACDDDDBDCBAACDADBBDBDBCCACADBAABBAADAADDDACDDCDBDDBBDAADDAACCCACDBBBBBDCDCDDDABBCBAAADACADDCDCDCBCDCACAAABCADBDBBDDACCBBDABDDBCADCCCADDCDBACBBBDAADDCDAAADBBCDADBDBCBDDCAABCCDCCDCABCAACADADAACADDBBDABAABACDACDCDBBDDCCBCBCAAACBDBDBBBDBDBBCADCBACDCCBDACBBACBCADCDBACCADCDBDCDBBACBBCDCAAAAABCCDDCDDBBCBABCBCAABDBCCACBABDCABAACBDBDBCCCCADBBCDCCCAABADBACDDBADCDCAADDDCBDDBDCDCCCCCCCDBCDDBACBBCDACDADCACBDBBCCCDCCBCBCDACBDDDACCCAADBDBBDADDCCDDDBCDABCCBACCCCCBAACCBCABAAABBCABBCACCCABCDACBCDBDACACDDCACBCBBCCADABCBBDDABADDAAABACCBDCDABCBBBBACCDABAACDCACCCBBCDDACCDBCBCBAACBBBBADBCBCDABAAAABADAAAACDACADACDBBCCABADDDCACDCAACCDABBDBDAABADDBDCCCACDADBDDDCBBCBDCADCBCDAABDDDDBBBBCDDCC"
+				ingresarMuestra(matriz37, muestra, tamano37)
+				Mostrar "MATRIZ 37 X 37"
+				Mostrar ""
+				mostrarMatriz(matriz37, tamano37)
+				genZ(matriz37, tamano37,esGenZ)
+				limpiarMonitor()
+				
+			Caso "H":
+				
+				muestra = "CACBCACAC"
+				ingresarMuestra(matriz3, muestra, tamano3)
+				Mostrar "MATRIZ 3 X 3"
+				Mostrar ""
+				mostrarMatriz(matriz3, tamano3)
+				genZ(matriz3, tamano3,esGenZ)
+				limpiarMonitor()
+				
+			Caso "I":
+				
+				muestra = "ACDDCADBCDABDBBA"
+				ingresarMuestra(matriz4, muestra, tamano4)
+				Mostrar "MATRIZ 4 X 4"
+				Mostrar ""
+				mostrarMatriz(matriz4, tamano4)
+				genZ(matriz4, tamano4, esGenZ)
+				limpiarMonitor()
+				
+			Caso "S":
+				
+				Mostrar "Saliendo..."
+				
+			De Otro Modo:
+				
+				Mostrar "Error. Ingreso una opcion incorrecta."
+				
+				limpiarMonitor()
+				
+		FinSegun
+		
+		Limpiar Pantalla
+		
+	Mientras Que opc <> "S"
+	
+	Mostrar "FIN DE LA EJECUCION DEL PROGRAMA."
+	
+	Mostrar ""
+	
+FinAlgoritmo
+
+SubProceso ingresarMuestra(matriz Por Referencia, muestra Por Valor, tamano Por Valor)
+	
+	Definir i, j, contadorLetra Como Entero
+	Definir letra Como Caracter
+	
+	contadorLetra = 0
+	
+	Para i = 0 Hasta tamano - 1 Con Paso 1 Hacer
+		
+		Para j = 0 Hasta tamano - 1 Con Paso 1 Hacer
+			
+			letra = Subcadena(muestra, contadorLetra, contadorLetra)
+			
+			matriz(i,j) = letra
+			
+			contadorLetra = contadorLetra + 1
+			
+		FinPara
+		
+	FinPara
+	
+FinSubProceso
+
+SubProceso mostrarMatriz(matriz Por Referencia, tamano Por Valor)
+	
+	Definir i, j Como Entero
+	
+	Para i = 0 Hasta tamano -1 Con Paso 1 Hacer
+		
+		Para j = 0 Hasta tamano -1 Con Paso 1 Hacer
+			
+			Mostrar Sin Saltar matriz(i,j) ,"  "
+			
+		FinPara
+		
+		Mostrar ""
+		
+	FinPara
+	
+FinSubProceso
+
+SubProceso genZ(matriz Por Referencia, tamano Por Valor, esGenZ Por Referencia)
+	
+	Definir i, j Como Entero
+	Definir esGenZDiagonalPrincipal, esGenZDiagonalSecundaria Como Logico
+	
+	esGenZDiagonalPrincipal = Verdadero
+	esGenZDiagonalSecundaria = Verdadero
+	
+	// Diagonal Primaria
+	Para i = 0 Hasta tamano - 1 Con Paso 1 Hacer
+		
+		Para j = 0 Hasta tamano - 1 Con Paso 1 Hacer
+			
+			Si i == j Entonces
+				
+				Si matriz(i,j) <> matriz(0,0) Entonces
+					
+					esGenZDiagonalPrincipal = Falso
+					
+				FinSi
+				
+			FinSi
+			
+		FinPara
+		
+	FinPara
+	
+	// Diagonal Secundaria
+	j = tamano - 1
+	
+	Para i = 0 Hasta tamano - 1 Con Paso 1 Hacer
+		
+		Si matriz(i,j) <> matriz(0,tamano - 1) Entonces
+			
+			esGenZDiagonalSecundaria = Falso
+			
+		FinSi
+		
+		j = j - 1
+		
+	FinPara
+	
+	Mostrar ""
+	
+	Si esGenZDiagonalPrincipal = Verdadero & esGenZDiagonalSecundaria = Verdadero Entonces
+		
+		Mostrar "Esta muestra SI contiene el Gen Z."
+		
+	SiNo
+		
+		Mostrar "Esta muestra NO contiene el Gen Z."
+		
+	FinSi
+	
+FinSubProceso
+
+SubProceso limpiarMonitor()
+	
+	Mostrar ""
+	Mostrar "Pulse una tecla para continuar."
+	Esperar Tecla
+	Limpiar Pantalla
+	
+FinSubProceso
+	
